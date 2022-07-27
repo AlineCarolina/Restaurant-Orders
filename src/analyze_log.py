@@ -5,13 +5,12 @@ def read(path):
     if not path.endswith(".csv"):
         raise FileNotFoundError(f"Extensão inválida: {path}")
     try:
-        data_csv = []
-        with open(path, "r", encoding="utf-8") as file:
-            for row in csv.reader(file):
-                data_csv.append(row)
-        return data_csv
-
-    except FileExistsError:
+        data = []
+        with open(path, "r") as file:
+            for line in csv.reader(file):
+                data.append(line)
+        return data
+    except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: {path}")
 
 
