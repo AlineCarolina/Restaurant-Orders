@@ -16,6 +16,10 @@ class TrackOrders:
 
     def add_new_order(self, customer, order, day):
         self.orders.append((customer, order, day))
+        if day not in self.days:
+            self.days[day] = 1
+        else:
+            self.days[day] += 1
 
     def get_most_ordered_dish_per_customer(self, customer):
         return most_requested_dish(customer, self.orders)
@@ -27,7 +31,7 @@ class TrackOrders:
         return day_without_order(customer, self.orders)
 
     def get_busiest_day(self):
-        pass
+        return max(self.days.items(), key=lambda x: x[1])[0]
 
     def get_least_busy_day(self):
-        pass
+        return min(self.days.items(), key=lambda x: x[1])[0]
